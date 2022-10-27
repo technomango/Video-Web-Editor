@@ -8,7 +8,7 @@ on:
 
 jobs:
   main:
-    if: needs.member.outputs.is_team_member == true
+    if: needs.member.outputs.is_team_member
     needs: member
     runs-on: ubuntu-latest
 
@@ -108,7 +108,7 @@ jobs:
 
     # Map a step output to a job output
     outputs:
-      is_team_member: ${{ steps.is_developer.outputs.permitted || steps.is_committer.outputs.permitted }}
+      is_team_member: ${{ steps.is_developer.outputs.permitted == 'true' || steps.is_committer.outputs.permitted == 'true' }}
 
     steps:
       - name: Check if user is Opencast developer
@@ -129,14 +129,14 @@ jobs:
           token: ${{ secrets.ORGANIZATION_MEMBER_SECRET }}
           exit: false
 
-      - name: Output ${{ steps.is_developer.outputs.permitted }}
-        run: echo ${{ steps.is_developer.outputs.permitted }}
+      - name: Output ${{ steps.is_developer.outputs.permitted == 'true' }}
+        run: echo ${{ steps.is_developer.outputs.permitted == 'true' }}
 
-      - name: Output ${{ steps.is_committer.outputs.permitted }}
-        run: echo ${{ steps.is_committer.outputs.permitted }}
+      - name: Output ${{ steps.is_committer.outputs.permitted == 'true' }}
+        run: echo ${{ steps.is_committer.outputs.permitted == 'true' }}
 
-      - name: Output ${{ steps.is_developer.outputs.permitted || steps.is_committer.outputs.permitted }}
-        run: echo ${{ steps.is_developer.outputs.permitted || steps.is_committer.outputs.permitted }}
+      - name: Output ${{ steps.is_developer.outputs.permitted == 'true' || steps.is_committer.outputs.permitted == 'true' }}
+        run: echo ${{ steps.is_developer.outputs.permitted == 'true' || steps.is_committer.outputs.permitted == 'true' }}
 
 
   translations:
