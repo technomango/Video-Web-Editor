@@ -129,8 +129,8 @@ jobs:
           token: ${{ secrets.ORGANIZATION_MEMBER_SECRET }}
           exit: false
 
-    - name: Output ${{ steps.is_developer.outputs.permitted || steps.is_committer.outputs.permitted }}
-      run: echo ${{ steps.is_developer.outputs.permitted || steps.is_committer.outputs.permitted }}
+      - name: Output ${{ steps.is_developer.outputs.permitted || steps.is_committer.outputs.permitted }}
+        run: echo ${{ steps.is_developer.outputs.permitted || steps.is_committer.outputs.permitted }}
 
 
   translations:
